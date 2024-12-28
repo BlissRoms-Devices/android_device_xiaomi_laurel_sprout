@@ -8,6 +8,7 @@
 
 #include "UdfpsHandler.h"
 
+#include <aidl/android/hardware/biometrics/fingerprint/BnFingerprint.h>
 #include <android-base/logging.h>
 #include <fcntl.h>
 #include <fstream>
@@ -24,6 +25,8 @@
 #define FOD_STATUS_ON 1
 
 #define FOD_UI_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_ui"
+
+using ::aidl::android::hardware::biometrics::fingerprint::AcquiredInfo;
 
 template <typename T>
 static void set(const std::string& path, const T& value) {
@@ -93,7 +96,7 @@ class LaurelSproutUdfpsHandler : public UdfpsHandler {
     }
 
     void onAcquired(int32_t result, int32_t vendorCode) {
-        if (result == FINGERPRINT_ACQUIRED_GOOD) {
+        if (static_cast<AcquiredInfo>(result) == AcquiredInfo::GOOD) {
             set(FOD_STATUS_PATH, FOD_STATUS_OFF);
         } else if (vendorCode == 21) {
             /*
