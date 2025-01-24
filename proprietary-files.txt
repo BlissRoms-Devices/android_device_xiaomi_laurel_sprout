@@ -33,7 +33,7 @@ vendor/lib/libVDSuperPhotoAPI.so;DISABLE_CHECKELF
 vendor/lib/libXMFD_AgeGender.so
 vendor/lib/lib_lowlight.so
 vendor/lib/libalCFR.so
-vendor/lib/libalLDC.so;DISABLE_CHECKELF
+vendor/lib/libalLDC.so
 vendor/lib/libalhLDC.so
 vendor/lib/libc++_shared.so
 vendor/lib/libcamera_scene.so
