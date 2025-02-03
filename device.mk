@@ -41,6 +41,14 @@ PRODUCT_PACKAGES += \
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
+# Rootdir
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    fstab.zram
+
+PRODUCT_PACKAGES += \
+    init.device.rc
+
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 28
 

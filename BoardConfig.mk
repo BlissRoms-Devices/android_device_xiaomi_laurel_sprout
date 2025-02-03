@@ -32,5 +32,8 @@ TARGET_KERNEL_CONFIG := vendor/laurel_sprout-perf_defconfig
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 
+# Recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
+
 # Inherit from the proprietary version
 include vendor/xiaomi/laurel_sprout/BoardConfigVendor.mk
