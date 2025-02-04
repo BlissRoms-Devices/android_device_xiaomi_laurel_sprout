@@ -45,6 +45,14 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_PACKAGES += \
     libudfpshandler
 
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(DEVICE_PATH)/overlay \
+    $(DEVICE_PATH)/overlay-lineage
+
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
+    $(DEVICE_PATH)/overlay-lineage/packages/apps/Aperture
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
