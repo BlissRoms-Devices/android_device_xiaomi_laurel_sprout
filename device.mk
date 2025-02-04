@@ -41,13 +41,18 @@ PRODUCT_PACKAGES += \
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
+# Fingerprint
+PRODUCT_PACKAGES += \
+    libudfpshandler
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
     fstab.zram
 
 PRODUCT_PACKAGES += \
-    init.device.rc
+    init.device.rc \
+    init.fingerprint.rc
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 28

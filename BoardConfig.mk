@@ -25,12 +25,19 @@ TARGET_NO_RECOVERY := true
 # Display
 TARGET_SCREEN_DENSITY := 320
 
+# Fingerprint
+TARGET_SURFACEFLINGER_UDFPS_LIB := //hardware/xiaomi:libudfps_extension.xiaomi
+TARGET_USES_FOD_ZPOS := true
+
 # Kernel
 TARGET_KERNEL_CONFIG := vendor/laurel_sprout-perf_defconfig
 
 # Partitions
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
+
+# Properties
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
