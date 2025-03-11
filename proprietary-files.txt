@@ -63,8 +63,6 @@ vendor/lib/libvideoutils.so
 vendor/lib/libvidhance.so;DISABLE_CHECKELF
 vendor/lib/mibokeh_660_opencl.bin
 vendor/lib/miwatermark.so
-vendor/lib64/libcapiv2svacnn.so
-vendor/lib64/libcapiv2vop.so
 vendor/lib64/libseemore.so
 vendor/lib64/libsns_device_mode_stub.so
 vendor/lib64/libsns_low_lat_stream_stub.so
