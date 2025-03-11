@@ -29,7 +29,7 @@ vendor/lib/hw/camera.trinket.so
 vendor/lib/libFaceGrade.so
 vendor/lib/libSNPE.so
 vendor/lib/libVDClearShot.so
-vendor/lib/libVDSuperPhotoAPI.so;DISABLE_CHECKELF
+vendor/lib/libVDSuperPhotoAPI.so
 vendor/lib/libXMFD_AgeGender.so
 vendor/lib/lib_lowlight.so
 vendor/lib/libalCFR.so
