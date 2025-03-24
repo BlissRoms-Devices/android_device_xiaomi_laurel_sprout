@@ -60,8 +60,7 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 
 # Rootdir
 PRODUCT_PACKAGES += \
-    fstab.qcom \
-    fstab.zram
+    fstab.qcom
 
 PRODUCT_PACKAGES += \
     init.device.rc \
