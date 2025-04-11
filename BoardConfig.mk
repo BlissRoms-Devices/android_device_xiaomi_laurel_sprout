@@ -28,7 +28,7 @@ TARGET_SURFACEFLINGER_UDFPS_LIB := //hardware/xiaomi:libudfps_extension.xiaomi
 TARGET_USES_FOD_ZPOS := true
 
 # Kernel
-TARGET_KERNEL_CONFIG := vendor/laurel_sprout-perf_defconfig
+TARGET_KERNEL_CONFIG += vendor/laurel_sprout.config
 
 # Partitions
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
