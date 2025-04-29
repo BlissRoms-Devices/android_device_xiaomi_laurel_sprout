@@ -27,7 +27,6 @@ TARGET_BOOTLOADER_BOARD_NAME := laurel_sprout
 TARGET_SCREEN_DENSITY := 320
 
 # Fingerprint
-TARGET_SURFACEFLINGER_UDFPS_LIB := //hardware/xiaomi:libudfps_extension.xiaomi
 TARGET_USES_FOD_ZPOS := true
 
 # Kernel

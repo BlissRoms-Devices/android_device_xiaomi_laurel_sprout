@@ -50,6 +50,8 @@ TARGET_SCREEN_WIDTH := 720
 PRODUCT_PACKAGES += \
     libudfpshandler
 
+$(call soong_config_set,surfaceflinger,udfps_lib,//hardware/xiaomi:libudfps_extension.xiaomi)
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(DEVICE_PATH)/overlay \
