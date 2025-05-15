@@ -42,5 +42,9 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
+# Security patch level - V12.0.26.0.RFQMIXM
+BOOT_SECURITY_PATCH := 2022-08-01
+VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
+
 # Inherit from the proprietary version
 include vendor/xiaomi/laurel_sprout/BoardConfigVendor.mk
