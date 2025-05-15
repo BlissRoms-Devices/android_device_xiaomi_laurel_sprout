@@ -20,12 +20,6 @@
 #define PARAM_NIT_FOD 1
 #define PARAM_NIT_NONE 0
 
-#define FOD_STATUS_PATH "/sys/class/touch/tp_dev/fod_status"
-#define FOD_STATUS_OFF 0
-#define FOD_STATUS_ON 1
-
-#define FOD_UI_PATH "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_ui"
-
 using ::aidl::android::hardware::biometrics::fingerprint::AcquiredInfo;
 
 template <typename T>
@@ -33,6 +27,15 @@ static void set(const std::string& path, const T& value) {
     std::ofstream file(path);
     file << value;
 }
+
+static const char* kFodUiPaths[] = {
+        "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui",
+        "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_ui",
+};
+
+static const char* kFodStatusPaths[] = {
+        "/sys/class/touch/tp_dev/fod_status",
+};
 
 static bool readBool(int fd) {
     char c;
@@ -60,11 +63,24 @@ class LaurelSproutUdfpsHandler : public UdfpsHandler {
 
         std::thread([this]() {
             int fd;
-            fd = open(FOD_UI_PATH, O_RDONLY);
+            for (auto& path : kFodUiPaths) {
+                fd = open(path, O_RDONLY);
+                if (fd >= 0) {
+                    break;
+                }
+            }
 
             if (fd < 0) {
                 LOG(ERROR) << "failed to open fd, err: " << fd;
                 return;
+            }
+
+            int fodStatusFd;
+            for (auto& path : kFodStatusPaths) {
+                fodStatusFd = open(path, O_RDWR);
+                if (fodStatusFd >= 0) {
+                    break;
+                }
             }
 
             struct pollfd fodUiPoll = {
@@ -82,7 +98,9 @@ class LaurelSproutUdfpsHandler : public UdfpsHandler {
 
                 mDevice->extCmd(mDevice, COMMAND_NIT,
                                 readBool(fd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
-                set(FOD_STATUS_PATH, readBool(fd) ? FOD_STATUS_ON : FOD_STATUS_OFF);
+                if (fodStatusFd >= 0) {
+                    write(fodStatusFd, readBool(fd) ? "1" : "0", 1);
+                }
             }
         }).detach();
     }
@@ -120,20 +138,18 @@ class LaurelSproutUdfpsHandler : public UdfpsHandler {
 
     void onAcquired(int32_t result, int32_t vendorCode) {
         if (static_cast<AcquiredInfo>(result) == AcquiredInfo::GOOD) {
-            set(FOD_STATUS_PATH, FOD_STATUS_OFF);
-        } else if (vendorCode == 21) {
+            set(kFodStatusPaths[0], 0);
+        } else if (vendorCode == 23) {
             /*
-             * vendorCode = 21 waiting for finger
-             * vendorCode = 22 finger down
-             * vendorCode = 23 finger up
+             * vendorCode = 23 waiting for fingerprint authentication on popups
              */
-            set(FOD_STATUS_PATH, FOD_STATUS_ON);
+            mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_FOD);
+            set(kFodStatusPaths[0], 1);
         }
     }
 
     void cancel() {
-        mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_NONE);
-        set(FOD_STATUS_PATH, FOD_STATUS_OFF);
+        // nothing
     }
 };
 
