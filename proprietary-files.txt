@@ -1146,3 +1146,6 @@ vendor/firmware/focaltech-ft3518-sumsung.ini
 vendor/firmware/goodix_cfg_group.bin
 vendor/firmware/goodix_firmware.bin
 vendor/firmware/gtx8_limits.csv
+
+# WiFi
+vendor/bin/cnss-daemon
