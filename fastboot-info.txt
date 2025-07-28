@@ -6,7 +6,6 @@ flash dtbo
 flash --apply-vbmeta vbmeta
 flash system
 flash vendor
-flash odm
 
 if-wipe erase userdata
 if-wipe erase metadata

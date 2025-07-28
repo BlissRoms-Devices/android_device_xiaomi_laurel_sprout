@@ -13,7 +13,6 @@ DEVICE_PATH := device/xiaomi/laurel_sprout
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
-    odm \
     system \
     vbmeta \
     vendor
@@ -34,9 +33,6 @@ TARGET_USES_FOD_ZPOS := true
 TARGET_KERNEL_CONFIG += vendor/laurel_sprout.config
 
 # Partitions
-TARGET_COPY_OUT_ODM := odm
-BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_ODMIMAGE_PARTITION_SIZE := 134217728
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
 BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 
