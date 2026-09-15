@@ -1,0 +1,27 @@
+name: Sync from Lineage
+
+on:
+  schedule:
+    - cron: "0 3 * * 1"   # weekly, Monday 03:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-lineage-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    uses: BlissRoms/upstream-sync/.github/workflows/sync.yml@main
+    with:
+      upstream_repo: LineageOS/android_device_xiaomi_laurel_sprout
+      upstream_branch: lineage-23.2
+      target_branch: waterlily-qpr2
+    secrets:
+      BOT_NAME: ${{ secrets.BOT_NAME }}
+      BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
+      TG_TOKEN: ${{ secrets.TG_TOKEN }}
+      TG_BLISSROMS_MERGE_TRACKER_CHAT: ${{ secrets.TG_BLISSROMS_MERGE_TRACKER_CHAT }}
